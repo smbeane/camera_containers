@@ -4,13 +4,15 @@ Description=Camera Snapshot Container
 [Service]
 Restart=always
 RestartSec=30
-EnvironmentFile=/etc/containers/systemd/camera.env
+EnvironmentFile=/etc/containers/systemd/north_camera.env
 
 [Container]
 Image=docker.io/linuxserver/ffmpeg
 Volume=${DIRECTORY}:/output:z
 Volume=/etc/localtime:/etc/localtime:ro
-Exec=-rtsp_transport tcp -fflags discardcorrupt -i rtsp://${USER}:${PASS}@${IP}:${PORT} -vf fps=1/600 -strftime 1 -strftime_mkdir 1 "/output/${SUB_DIRECTORY}/%%m-%%d-%%Y_%%H-%%M-%%S.png
+Exec=-rtsp_transport tcp -fflags discardcorrupt -i rtsp://${USER}:${PASS}@${IP}:${PORT} \
+        -vf fps=1/600 -strftime 1 -strftime_mkdir 1 \
+        "/output/north_camera_%%m-%%d-%%Y/%%m-%%d-%%Y_%%H-%%M-%%S.png"
 
 [Install]
 WantedBy=default.target
