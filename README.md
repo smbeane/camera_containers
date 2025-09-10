@@ -41,7 +41,8 @@ In this file, change the file directory and name of the environment file as need
 - `Exec`: The core command that runs inside the container.
 
     - `-i rtsp://${USER}:${PASS}@${IP}:${PORT}`: The input stream URL, using the variables from camera.env.
-    - `vf fps=1/600`: This is the frame rate filter. It captures one frame every 600 seconds (10 minutes). You can adjust this value to change the snapshot frequency.... 
+    - `vf fps=1/600`: This is the frame rate filter. It captures one frame every 600 seconds (10 minutes). You can adjust this value to change the snapshot frequency. 
+    - `-strftime_mkdir 1`: This part of the program may or may not work depending on compatability. If not, create a crontab that creates the directories at 12:00 AM each morning.
     - `"/output/${SUB\_DIRECTORY}/%%m-%%d-%%Y\_%%H-%%M-%%S.png"`: The output path and filename format for the snapshots.
     
 ## Usage
